@@ -286,3 +286,16 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+
+# NPM 
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Javascript
+/test/unit/coverage/
+/dist/
+package-lock.json
