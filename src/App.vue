@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h1>TalkPad</h1>
+    <talkpad-nav></talkpad-nav>
     <router-view/>
   </div>
 </template>
 
 <script>
+import Navigation from './components/Navigation'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    'talkpad-nav': Navigation
+  }
 }
 </script>
 
