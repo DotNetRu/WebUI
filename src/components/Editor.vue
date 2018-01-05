@@ -22,69 +22,113 @@
     </div>
 
     <fieldset class="form-group">
-      <div class="form-group row">
-        <label class="offset-sm-2 col-sm-10  col-form-label">Площадка:</label>
-      </div>
+      <legend>Площадка:</legend>
 
-      <div class="form-group row" >
-        <label for="venueId" class="col-sm-2 col-form-label">Идентификатор:</label>
-        <div class="col-sm-10">
-          <div class="input-group">
-            <input type="text" class="form-control" required id="venueId"/>
-            <div class="input-group-append" v-if="!newVenue">
-              <div class="input-group-text"><i title="Новая площадка" class="fa fa-plus-circle" @click="addVenue()" ></i></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group row" v-if="newVenue">
-        <label for="venueName" class="col-sm-2 col-form-label">Название:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" required id="venueName"/>
-        </div>
-      </div>
-
-      <div class="form-group row" v-if="newVenue">
-        <label for="venueAddress" class="col-sm-2 col-form-label">Адрес:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" required id="venueAddress"/>
-        </div>
-      </div>
-
-      <div class="form-group row" v-if="newVenue">
-        <label for="mapUrl" class="col-sm-2 col-form-label">Карта:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" required id="mapUrl"/>
-        </div>
-      </div>
-
-
+      <venue-editor v-bind.sync="venue"/>
     </fieldset>
 
 
     <fieldset class="form-group">
-      <div class="form-group row">
-        <label class="offset-sm-2 col-sm-10  col-form-label">Друзья:</label>
+      <legend>Друзья:</legend>
+
+      <friend-editor v-for="(friend, index) of friends"
+                     :key="index"
+                     v-bind.sync="friend"
+                     :allowRemove="!denyRemoveFriend"
+                     :index="index"
+                     @remove="removeFriend(friend)"
+                          />
+
+      <div class="form-group row" >
+        <div class="col-form-label offset-sm-2 col-sm-10">
+          <button class="btn btn-info" @click="addFriend()"><i class="fa fa-plus"></i> Еще один друг</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <legend>Сессии:</legend>
+
+      <session-editor v-for="(session, index) in sessions"
+                      v-bind.sync="session"
+                      :key="index"/>
+
+      <div class="form-group row" >
+        <div class="col-form-label offset-sm-2 col-sm-10">
+          <button class="btn btn-info" @click="addSession()"><i class="fa fa-plus"></i> Еще одина сессия</button>
+        </div>
       </div>
     </fieldset>
   </div>
 </template>
 
 <script>
+    import FriendEditor from './FriendEditor'
+    import VenueEditor from './VenueEditor'
+    import SessionEditor from './SessionEditor'
+
     export default {
+      components: {
+        SessionEditor,
+        VenueEditor,
+        FriendEditor
+      },
       name: 'editor',
       data: function () {
-        return {newVenue: false}
+        return {
+          venue: {
+            isNew: false,
+            id: '',
+            name: '',
+            address: '',
+            mapUrl: '',
+            description: ''
+          },
+          friends: [{
+            isNew: false,
+            id: '',
+            name: '',
+            address: '',
+            description: ''
+          }],
+          sessions: [{
+            speakers: [{isNew: false}]
+          }]
+        }
+      },
+      computed: {
+        denyRemoveFriend: function () {
+          return this.friends.length <= 1
+        },
+        denyRemoveSession: function () {
+          return this.sessions.length <= 1
+        }
       },
       methods: {
-        addVenue: function () {
-          this.newVenue = !this.newVenue
+
+        addFriend: function () {
+          this.friends.push({ isNew: false })
+        },
+        removeFriend: function (friend) {
+          let index = this.friends.indexOf(friend)
+          this.friends.splice(index, 1)
+        },
+        addSession: function () {
+          this.sessions.push({speakers: [{isNew: false}]})
+        },
+        removeSession: function (session) {
+          let index = this.sessions.indexOf(session)
+          this.sessions.splice(index, 1)
+        },
+        removeSpeaker: function (speaker, session) {
+          let index = session.speakers.indexOf(speaker)
+          session.speakers.splice(index, 1)
         }
       }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+
 
 </style>
