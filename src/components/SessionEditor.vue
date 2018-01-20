@@ -1,13 +1,7 @@
 <template>
-  <fieldset>
-    <legend>{{index + 1}}.</legend>
+  <div>
 
-    <div class="form-group row">
-      <label for="talkId" class="col-sm-2 col-form-label">Идентификатор:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" required id="talkId"/>
-      </div>
-    </div>
+    <input-component label="Идентификатор" v-model="talkId" required />
 
     <div class="form-group row">
       <label for="startTime" class="col-sm-2 col-form-label">Дата и время:</label>
@@ -17,84 +11,73 @@
           <input type="text" class="form-control" required id="startTime"/>
           <label class="mx-2" for="endTime" >До:</label>
           <input type="text" class="form-control" required id="endTime"/>
-          <button class="btn btn-dark ml-2" @click="$emit('remove')" :disabled="!isAllowRemove"><i class="fa fa-trash"></i> Удалить сессию</button>
         </div>
       </div>
     </div>
 
-    <fieldset>
-      <legend>Спикеры</legend>
+    <input-component label="Название" v-model="talkTitle" required />
 
-      <speaker-editor v-for="(speaker, speakerIndex) of speakers" :key="speakerIndex" v-bind.sync="speaker" :index="speakerIndex"/>
+    <input-component label="Описание" v-model="talkDescription" required type="textarea"/>
 
-      <div class="form-group row" >
-        <div class="col-form-label offset-sm-2 col-sm-10">
-          <button class="btn btn-info" @click="addSpeaker()"><i class="fa fa-plus"></i> Еще один спикер</button>
-        </div>
-      </div>
-    </fieldset>
-
-    <div class="form-group row" >
-      <label for="talkTitle" class="col-sm-2 col-form-label">Название:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" required id="talkTitle"/>
-      </div>
-    </div>
-
-    <div class="form-group row" >
-      <label for="talkDescription" class="col-sm-2 col-form-label">Описание:</label>
-      <div class="col-sm-10">
-        <textarea class="form-control" required id="talkDescription"></textarea>
-      </div>
-    </div>
-
-    <div class="form-group row" >
+    <div class="form-group row" v-for="seeAlso of seeAlsoTalkIdsComputed">
       <label for="seeAlsoTalkId" class="col-sm-2 col-form-label">Другие части:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" required id="seeAlsoTalkId"/>
+        <div class="input-group">
+          <input type="text" class="form-control" id="seeAlsoTalkId" v-model="seeAlso.value"/>
+          <div class="input-group-append button" v-if="seeAlso.value">
+            <div class="input-group-text">
+              <i title="Удалить ссылку" class="fa fa-remove-circle" @click="removeSeeAlso(seeAlso)" ></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="form-group row" >
-      <label for="CodeUrl" class="col-sm-2 col-form-label">Код:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" required id="CodeUrl"/>
-      </div>
-    </div>
 
-    <div class="form-group row" >
-      <label for="SlidesUrl" class="col-sm-2 col-form-label">Слайды:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" required id="SlidesUrl"/>
-      </div>
-    </div>
+    <input-component type="url" label="Код" v-model="codeUrl" />
+    <input-component type="url" label="Слайды" v-model="slidesUrl" />
+    <input-component type="url" label="Видео" v-model="videoUrl" />
 
-    <div class="form-group row" >
-      <label for="VideoUrl" class="col-sm-2 col-form-label">Видео:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" required id="VideoUrl"/>
-      </div>
-    </div>
-
-  </fieldset>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
     import SpeakerEditor from './SpeakerEditor'
-
+    import InputComponent from './InputComponent'
     export default {
-      components: {SpeakerEditor},
+      components: {
+        InputComponent,
+        SpeakerEditor},
       props: {
-        index: Number,
+        value: Object,
+
         isAllowRemove: Boolean,
-        speakers: Array
+        speakers: Array,
+        talkId: String,
+        talkTitle: String,
+        talkDescription: String,
+        seeAlsoTalkIds: {
+          type: Array,
+          default: function () {
+            return []
+          }
+        }
+      },
+      computed: {
+        seeAlsoTalkIdsComputed: function () {
+          let values = [...this.seeAlsoTalkIds]
+          values.push({value: ''})
+          return values
+        }
       },
       name: 'session-editor',
       methods: {
-        addSpeaker: function (session) {
-
-          this.$emit('update:speakers', )
-          this.speakers.push({isNew: false})
+        addSpeaker: function () {
+          let newSpeakers = [...this.speakers]
+          newSpeakers.push({isNew: false})
+          this.$emit('update:speakers', newSpeakers)
+        },
+        removeSeeAlso: function (seeAlso) {
         }
       }
     }

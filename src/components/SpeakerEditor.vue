@@ -72,7 +72,7 @@
   </fieldset>
 </template>
 
-<script>
+<script lang="ts">
   export default {
     name: 'speaker-editor',
     props: {

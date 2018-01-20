@@ -1,81 +1,55 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <h2>Добавляем встречу</h2>
+    <div class="row">
+      <div class="col-sm-9">
 
-    <div class="form-group row">
-      <label for="community" class="col-sm-2 col-form-label">Сообщество:</label>
-      <div class="col-sm-10">
-        <select class="form-control" id="community" required>
-          <option>KryDotNet</option>
-          <option>MskDotNet</option>
-          <option>SarDotNet</option>
-          <option>SpbDotNet</option>
-        </select>
-      </div>
-    </div>
+        <meetup-general-editor v-if="state==0"></meetup-general-editor>
 
-    <div class="form-group row">
-      <label for="meetupId" class="col-sm-2 col-form-label">Идентификатор:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" required id="meetupId"/>
-      </div>
-    </div>
-
-    <fieldset class="form-group">
-      <legend>Площадка:</legend>
-
-      <venue-editor v-bind.sync="venue"/>
-    </fieldset>
-
-
-    <fieldset class="form-group">
-      <legend>Друзья:</legend>
-
-      <friend-editor v-for="(friend, index) of friends"
-                     :key="index"
-                     v-bind.sync="friend"
-                     :allowRemove="!denyRemoveFriend"
-                     :index="index"
-                     @remove="removeFriend(friend)"
-                          />
-
-      <div class="form-group row" >
-        <div class="col-form-label offset-sm-2 col-sm-10">
-          <button class="btn btn-info" @click="addFriend()"><i class="fa fa-plus"></i> Еще один друг</button>
+        <div v-for="(session, index) of sessions">
+          <session-editor v-bind="sessions" v-if="index + 1 == state && talk"/>
         </div>
+
       </div>
-    </fieldset>
+      <div class="col-sm-2">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a href="#" class="nav-link "
+               v-bind:class="{active: state == 0}"
+               @click="state=0">Общая информация</a>
+          </li>
 
-    <fieldset class="form-group">
-      <legend>Сессии:</legend>
+          <template v-for="(session, index) of sessions">
+            <li class="nav-item"><a href="#" class="nav-link "
+                                    v-bind:class="{active: state == index+1 && talk}"
+                                    @click="selectTalk(index)">Доклад {{index + 1}}</a></li>
+            <li class="nav-item"><a href="#" class="nav-link "
+                                    v-bind:class="{active: state == index+1 && !talk}"
+                                    @click="selectSpeaker(index)">Спикеры</a></li>
+          </template>
 
-      <session-editor v-for="(session, index) in sessions"
-                      v-bind.sync="session"
-                      :key="index"/>
-
-      <div class="form-group row" >
-        <div class="col-form-label offset-sm-2 col-sm-10">
-          <button class="btn btn-info" @click="addSession()"><i class="fa fa-plus"></i> Еще одина сессия</button>
-        </div>
+          <li class="nav-item"><a href="#" class="nav-link " @click="addSession()"><i class="fa fa-plus"></i> Добавить доклад</a></li>
+        </ul>
       </div>
-    </fieldset>
+
+    </div>
   </div>
 </template>
 
-<script>
-    import FriendEditor from './FriendEditor'
-    import VenueEditor from './VenueEditor'
+<script lang="ts">
     import SessionEditor from './SessionEditor'
+    import MeetupGeneralEditor from './MeetupGeneralEditor'
 
     export default {
       components: {
-        SessionEditor,
-        VenueEditor,
-        FriendEditor
+        MeetupGeneralEditor,
+        SessionEditor
       },
       name: 'editor',
       data: function () {
         return {
+          state: 0,
+          talk: true,
           venue: {
             isNew: false,
             id: '',
@@ -105,7 +79,14 @@
         }
       },
       methods: {
-
+        selectTalk: function (index) {
+          this.state = index + 1
+          this.talk = true
+        },
+        selectSpeaker: function (index) {
+          this.state = index + 1
+          this.talk = false
+        },
         addFriend: function () {
           this.friends.push({ isNew: false })
         },
@@ -114,7 +95,8 @@
           this.friends.splice(index, 1)
         },
         addSession: function () {
-          this.sessions.push({speakers: [{isNew: false}]})
+          this.state = this.sessions.push({speakers: [{isNew: false}]})
+          this.talk = true
         },
         removeSession: function (session) {
           let index = this.sessions.indexOf(session)
