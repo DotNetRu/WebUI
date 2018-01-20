@@ -45,7 +45,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import Vue from "vue";
+
+  const VenueEditor = Vue.extend({
     name: 'venue-editor',
     props: {
       isNew: Boolean,
@@ -59,7 +61,7 @@
         this.$emit('update:isNew', !this.isNew)
       }
     }
-  }
+  });
 </script>
 
 <style scoped>

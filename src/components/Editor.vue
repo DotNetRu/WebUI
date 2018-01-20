@@ -37,10 +37,11 @@
 </template>
 
 <script lang="ts">
+    import Vue from "vue";
     import SessionEditor from './SessionEditor'
     import MeetupGeneralEditor from './MeetupGeneralEditor'
 
-    export default {
+    const Editor = Vue.extend({
       components: {
         MeetupGeneralEditor,
         SessionEditor
@@ -107,7 +108,7 @@
           session.speakers.splice(index, 1)
         }
       }
-    }
+    });
 </script>
 
 <style lang="scss">

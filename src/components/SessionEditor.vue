@@ -42,9 +42,11 @@
 </template>
 
 <script lang="ts">
+  import Vue from "vue";
     import SpeakerEditor from './SpeakerEditor'
     import InputComponent from './InputComponent'
-    export default {
+
+    const SessionEditor = Vue.extend({
       components: {
         InputComponent,
         SpeakerEditor},
@@ -80,7 +82,7 @@
         removeSeeAlso: function (seeAlso) {
         }
       }
-    }
+    });
 </script>
 
 <style scoped>

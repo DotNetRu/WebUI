@@ -49,7 +49,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import Vue from "vue";
+
+  const FrienEditor = Vue.extend({
     name: 'friend-editor',
     props: {
       allowRemove: Boolean,
@@ -68,7 +70,7 @@
         this.$emit('remove')
       }
     }
-  }
+  });
 </script>
 
 <style scoped>

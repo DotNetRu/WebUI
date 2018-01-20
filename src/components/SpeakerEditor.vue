@@ -73,7 +73,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import Vue from "vue";
+
+  const SpeakerEditor = Vue.extend({
     name: 'speaker-editor',
     props: {
       allowRemove: Boolean,
@@ -85,7 +87,9 @@
         this.$emit('update:isNew', !this.isNew)
       }
     }
-  }
+  });
+
+
 </script>
 
 <style scoped>

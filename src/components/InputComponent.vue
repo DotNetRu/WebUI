@@ -20,7 +20,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import Vue from "vue";
+
+  const InputComponent = Vue.extend({
     name: 'input-component',
     props: {
       value: String,
@@ -38,5 +40,5 @@
     mounted () {
       this.id = this._uid
     }
-  }
+  });
 </script>
