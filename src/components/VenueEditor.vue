@@ -50,11 +50,13 @@
   const VenueEditor = Vue.extend({
     name: 'venue-editor',
     props: {
-      isNew: Boolean,
-      id: String,
-      name: String,
-      address: String,
-      mapUrl: String
+      venueId: String,
+      newVenue: {
+        id: String,
+        name: String,
+        address: String,
+        mapUrl: String
+      }
     },
     methods: {
       toggleVenue: function () {
@@ -62,6 +64,8 @@
       }
     }
   });
+
+  export default VenueEditor;
 </script>
 
 <style scoped>

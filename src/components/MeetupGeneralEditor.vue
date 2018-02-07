@@ -3,7 +3,7 @@
     <div class="form-group row">
       <label for="community" class="col-sm-2 col-form-label">Сообщество:</label>
       <div class="col-sm-10">
-        <select class="form-control" id="community" required>
+        <select class="form-control" id="community" v-model="meetup.communityId" required>
           <option>KryDotNet</option>
           <option>MskDotNet</option>
           <option>SarDotNet</option>
@@ -12,19 +12,19 @@
       </div>
     </div>
 
-    <input-component v-model="meetupId" label="Идентификатор" required/>
+    <input-component v-model="meetup.meetupId" label="Идентификатор" required/>
 
     <fieldset class="form-group">
       <legend>Площадка:</legend>
 
-      <venue-editor v-bind.sync="venue"/>
+      <venue-editor v-bind.sync="meetup"/>
     </fieldset>
 
 
     <fieldset class="form-group">
       <legend>Друзья:</legend>
 
-      <friend-editor v-for="(friend, index) of friends"
+      <friend-editor v-for="(friend, index) of meetup.friends"
                      :key="index"
                      v-bind.sync="friend"
                      :allowRemove="!denyRemoveFriend"
@@ -45,14 +45,25 @@
   import FriendEditor from './FriendEditor'
   import VenueEditor from './VenueEditor'
   import InputComponent from './InputComponent'
+  import {IMeetup} from "./models/meetup";
+  import Vue from 'vue';
 
-  export default {
+  const MeetupGeneralEditor = Vue.extend({
     name: 'meetup-general-editor',
     data: function () {
-      return {
-        meetupId: '',
-        friends: [],
-        venue: {}
+      let meetup : IMeetup = {
+        communityId: '',
+        friendIds: [],
+        id: '',
+        venueId: '',
+        sessions: []
+      };
+
+      return {meetup: meetup };
+    },
+    props: {
+      value: {
+        type: Object
       }
     },
     components: {
@@ -60,7 +71,9 @@
       VenueEditor,
       FriendEditor
     }
-  }
+  });
+
+  export default MeetupGeneralEditor;
 </script>
 
 <style scoped>

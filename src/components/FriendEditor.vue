@@ -71,6 +71,8 @@
       }
     }
   });
+
+  export default FrienEditor;
 </script>
 
 <style scoped>

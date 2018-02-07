@@ -37,8 +37,10 @@
         id: ''
       }
     },
-    mounted () {
-      this.id = this._uid
+    mounted: function () {
+      this.id = <string>(<any>this)['_uid'];
     }
   });
+
+  export default InputComponent;
 </script>

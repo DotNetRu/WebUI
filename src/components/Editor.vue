@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-sm-9">
 
-        <meetup-general-editor v-if="state==0"></meetup-general-editor>
+        <meetup-general-editor v-if="state==0" v-model="meetup"></meetup-general-editor>
 
         <div v-for="(session, index) of sessions">
           <session-editor v-bind="sessions" v-if="index + 1 == state && talk"/>
@@ -19,7 +19,7 @@
                @click="state=0">Общая информация</a>
           </li>
 
-          <template v-for="(session, index) of sessions">
+          <template v-for="(session, index) of meetup.sessions">
             <li class="nav-item"><a href="#" class="nav-link "
                                     v-bind:class="{active: state == index+1 && talk}"
                                     @click="selectTalk(index)">Доклад {{index + 1}}</a></li>
@@ -28,7 +28,11 @@
                                     @click="selectSpeaker(index)">Спикеры</a></li>
           </template>
 
-          <li class="nav-item"><a href="#" class="nav-link " @click="addSession()"><i class="fa fa-plus"></i> Добавить доклад</a></li>
+          <li class="nav-item">
+            <a href="#" class="nav-link " @click="addSession()">
+              <i class="fa fa-plus"></i> Добавить доклад
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -37,9 +41,10 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
+    import Vue from 'vue';
     import SessionEditor from './SessionEditor'
     import MeetupGeneralEditor from './MeetupGeneralEditor'
+    import {IMeetup} from "./models/meetup";
 
     const Editor = Vue.extend({
       components: {
@@ -48,67 +53,48 @@
       },
       name: 'editor',
       data: function () {
+        let meetup : IMeetup = {
+          communityId: '',
+          friendIds: [],
+          id: '',
+          venueId: '',
+          newVenue: null,
+          sessions: []
+        };
+
         return {
           state: 0,
           talk: true,
-          venue: {
-            isNew: false,
-            id: '',
-            name: '',
-            address: '',
-            mapUrl: '',
-            description: ''
-          },
-          friends: [{
-            isNew: false,
-            id: '',
-            name: '',
-            address: '',
-            description: ''
-          }],
-          sessions: [{
-            speakers: [{isNew: false}]
-          }]
+          meetup: meetup
         }
       },
       computed: {
-        denyRemoveFriend: function () {
-          return this.friends.length <= 1
+        denyRemoveFriend: function() : boolean {
+          return false;
         },
-        denyRemoveSession: function () {
-          return this.sessions.length <= 1
+        denyRemoveSession: function() : boolean {
+          return false;
         }
       },
       methods: {
-        selectTalk: function (index) {
+        selectTalk: function (index: number) {
           this.state = index + 1
           this.talk = true
         },
-        selectSpeaker: function (index) {
+        selectSpeaker: function (index: number) {
           this.state = index + 1
           this.talk = false
         },
         addFriend: function () {
-          this.friends.push({ isNew: false })
         },
-        removeFriend: function (friend) {
-          let index = this.friends.indexOf(friend)
-          this.friends.splice(index, 1)
+        removeFriend: function () {
         },
         addSession: function () {
-          this.state = this.sessions.push({speakers: [{isNew: false}]})
-          this.talk = true
-        },
-        removeSession: function (session) {
-          let index = this.sessions.indexOf(session)
-          this.sessions.splice(index, 1)
-        },
-        removeSpeaker: function (speaker, session) {
-          let index = session.speakers.indexOf(speaker)
-          session.speakers.splice(index, 1)
         }
       }
     });
+
+    export default Editor;
 </script>
 
 <style lang="scss">

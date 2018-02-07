@@ -66,7 +66,7 @@
         }
       },
       computed: {
-        seeAlsoTalkIdsComputed: function () {
+        seeAlsoTalkIdsComputed: function (): string[] {
           let values = [...this.seeAlsoTalkIds]
           values.push({value: ''})
           return values
@@ -79,10 +79,12 @@
           newSpeakers.push({isNew: false})
           this.$emit('update:speakers', newSpeakers)
         },
-        removeSeeAlso: function (seeAlso) {
+        removeSeeAlso: function (seeAlso: string) {
         }
       }
     });
+
+    export default SessionEditor;
 </script>
 
 <style scoped>
