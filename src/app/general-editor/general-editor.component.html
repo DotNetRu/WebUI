@@ -1,0 +1,52 @@
+<h2>Общая информация</h2>
+<div>
+  <div class="form-group row">
+    <label for="community" class="col-sm-2 col-form-label">Сообщество:</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="community" [(ngModel)]="meetup.communityId" required>
+        <option>KryDotNet</option>
+        <option>MskDotNet</option>
+        <option>SarDotNet</option>
+        <option>SpbDotNet</option>
+      </select>
+    </div>
+  </div>
+
+  <app-input-editor
+    [type]="InputType.Text"
+    [(value)]="meetup.id"
+    label="Идентификатор"></app-input-editor>
+
+  <app-input-editor
+    [(value)]="meetup.name"
+    label="Название"></app-input-editor>
+
+  <fieldset class="form-group">
+    <legend>Площадка:</legend>
+
+    <app-venue-editor [meetup]="meetup"></app-venue-editor>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <legend>Друзья:</legend>
+
+    <fieldset *ngFor="let friendId of meetup.friendIds; index as index; trackBy: trackByIndex">
+      <legend>{{index + 1}}</legend>
+
+      <button class="btn btn-dark ml-2 pull-right" (click)="removeFriend(friendId)" [disabled]="meetup.friendIds.length <= 1"><i class="fa fa-trash"></i> Удалить</button>
+
+      <app-friend-editor
+                         [friendId]="friendId"
+                         [friendIndex]="index"
+                         [meetup]="meetup">
+      </app-friend-editor>
+    </fieldset>
+
+
+    <div class="form-group row" >
+      <div class="col-form-label col-sm-12">
+        <button class="btn btn-info pull-right" (click)="addFriend()"><i class="fa fa-plus"></i> Еще один друг</button>
+      </div>
+    </div>
+  </fieldset>
+</div>

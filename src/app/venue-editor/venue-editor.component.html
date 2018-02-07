@@ -1,0 +1,31 @@
+<div>
+  <app-id-editor *ngIf="!meetup.newVenue"
+    label="Идентификатор"
+    [add]="true"
+    buttonTitle="Новая площадка"
+    [(value)]="meetup.venueId"
+    (toggle)="toggleVenue()"
+  ></app-id-editor>
+
+  <app-id-editor *ngIf="meetup.newVenue"
+    label="Идентификатор"
+    [add]="false"
+    buttonTitle="Уже существующая площадка"
+    [(value)]="meetup.newVenue.id"
+    (toggle)="toggleVenue()"
+  ></app-id-editor>
+
+  <app-input-editor *ngIf="meetup.newVenue"
+                    label="Название" [(value)]="meetup.newVenue.name" [type]="InputType.Text">
+  </app-input-editor>
+
+  <app-input-editor *ngIf="meetup.newVenue"
+                    label="Адрес" [(value)]="meetup.newVenue.address" [type]="InputType.Text">
+  </app-input-editor>
+
+  <app-input-editor *ngIf="meetup.newVenue"
+                    label="Карта" [(value)]="meetup.newVenue.mapUrl" [type]="InputType.Url">
+  </app-input-editor>
+
+
+</div>

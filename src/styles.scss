@@ -1,0 +1,22 @@
+@import 'variables';
+@import '../node_modules/font-awesome/scss/font-awesome';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+
+
+fieldset{
+  border: 1px solid #ced4da;
+  border-radius: 0.25em;
+  padding: 1rem 1rem 0 1rem;
+  margin-top: 1rem;
+}
+
+legend {
+  width: auto;
+  text-align: left;
+  margin-right: 1em;
+}
+
+.button{
+  cursor: pointer;
+}
