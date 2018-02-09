@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ElementRef} from '@angular/core';
 import {IMeetup} from '../models/meetup';
 import {IFile} from '../models/file';
 
@@ -16,17 +16,15 @@ export class ResultViewerComponent {
 
   constructor() { }
 
-  transform(meetup: IMeetup) {
-    this.files = [
-      {
-        name: meetup.id + '.xml',
-        folder: 'meetups',
-        content: '<meetup></meetup>'
-      }
-    ];
-
-
-    meetup.id
+  public download(element: any, fileName: string) {
+    const contentType = 'application/octet-stream';
+    console.log(element);
+    const content =  element.textContent;
+    var a = document.createElement('a');
+    var blob = new Blob([content], {'type': contentType});
+    a.href = window.URL.createObjectURL(blob);
+    a.download = fileName;
+    a.click();
   }
 
 }

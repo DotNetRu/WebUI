@@ -16,6 +16,7 @@ import { SessionEditorComponent } from './session-editor/session-editor.componen
 import { SpeakerEditorComponent } from './speaker-editor/speaker-editor.component';
 import { SpeakerListEditorComponent } from './speaker-list-editor/speaker-list-editor.component';
 import { ResultViewerComponent } from './result-viewer/result-viewer.component';
+import { XmlEncodePipe } from './xml-encode.pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ResultViewerComponent } from './result-viewer/result-viewer.component';
     SessionEditorComponent,
     SpeakerEditorComponent,
     SpeakerListEditorComponent,
-    ResultViewerComponent
+    ResultViewerComponent,
+    XmlEncodePipe
   ],
   imports: [
     BrowserModule,

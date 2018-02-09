@@ -1,6 +1,6 @@
 <app-id-editor *ngIf="!isNewFriend"
           buttonTitle="Новый друг"
-          [(value)]="friendId"
+          [(value)]="meetup.friendIds[friendIndex]"
           label="Идентификатор"
           [add]="true"
           (toggle)="toggle()" >
@@ -9,7 +9,7 @@
 <app-id-editor *ngIf="isNewFriend"
                buttonTitle="Уже существующий друг"
                [value]="friend.id"
-               (valueChange)="friend.id = $event; friendId = $event"
+               (valueChange)="friend.id = $event; meetup.friendIds[friendIndex] = $event"
                label="Идентификатор"
                [add]="false"
                (toggle)="toggle()">

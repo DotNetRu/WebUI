@@ -36,7 +36,6 @@
       <button class="btn btn-dark ml-2 pull-right" (click)="removeFriend(friendId)" [disabled]="meetup.friendIds.length <= 1"><i class="fa fa-trash"></i> Удалить</button>
 
       <app-friend-editor
-                         [friendId]="friendId"
                          [friendIndex]="index"
                          [meetup]="meetup">
       </app-friend-editor>

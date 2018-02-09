@@ -11,7 +11,6 @@ import {IFriend} from '../models/friend';
 export class FriendEditorComponent  {
 
   private _meetup: IMeetup;
-  private _friendId = '';
   private _friendIndex: number;
 
   public InputType = InputType;
@@ -27,15 +26,6 @@ export class FriendEditorComponent  {
     this.initIsNewFriend();
   }
 
-  @Input()
-  public get friendId(): string {
-    return this._friendId;
-  }
-
-  public set friendId(value: string) {
-    this._friendId = value;
-    this.initIsNewFriend();
-  }
 
   @Input()
   get meetup(): IMeetup {
@@ -54,28 +44,33 @@ export class FriendEditorComponent  {
     description: '',
     name: '',
     url: ''
-  }
+  };
 
   public toggle() {
     this.isNewFriend = !this.isNewFriend;
 
     if (this.isNewFriend) {
-      this.friend.id = this.friendId;
+      this.friend.id = this.meetup.friendIds[this.friendIndex];
       this.meetup.newFriends.push(this.friend);
     } else {
-      const index = this.meetup.newFriends.findIndex(item => item.id === this._friendId);
+      const index = this.meetup.newFriends.findIndex(item => item.id === this.meetup.friendIds[this.friendIndex]);
       this.meetup.newFriends.splice(index, 1);
     }
   }
 
   private initIsNewFriend() {
-    if (!this.meetup || this._friendId === '' || !this._friendIndex) {
+    if (!this._meetup || this._friendIndex === undefined) {
       this.isNewFriend = false;
       return;
     }
 
-    const existingFriend = this.meetup.newFriends.find(item => item.id === this._friendId);
+    const friendId = this.meetup.friendIds[this.friendIndex];
+    const existingFriend = this.meetup.newFriends.find(item => item.id === friendId);
 
     this.isNewFriend = existingFriend != null && existingFriend !== undefined;
+
+    if (this.isNewFriend) {
+      this.friend = existingFriend;
+    }
   }
 }
