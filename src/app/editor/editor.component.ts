@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IMeetup} from '../models/meetup';
+import {IMeetup, MeetupFactory} from '../models/meetup';
 
 @Component({
   selector: 'app-editor',
@@ -16,7 +16,7 @@ export class EditorComponent {
   @Input()
   public meetup: IMeetup ;
 
-  addSession() {
+  public addSession() {
     this.meetup.sessions.push({
       startTime: new Date(),
       endTime: new Date(),
@@ -36,6 +36,12 @@ export class EditorComponent {
 
     this.state = EditorState.Talk;
     this.selectedIndex = this.meetup.sessions.length - 1;
+  }
+
+  public clear() {
+    if(window.confirm('Очистить встречу?')){
+      this.meetup = Object.assign(this.meetup, MeetupFactory.createMeetup());
+    }
   }
 }
 

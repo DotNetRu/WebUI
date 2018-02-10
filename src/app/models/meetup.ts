@@ -15,3 +15,35 @@ export interface IMeetup {
   newFriends: IFriend[];
   newSpeakers: ISpeaker[];
 }
+
+
+export class MeetupFactory {
+  public static createMeetup(): IMeetup {
+    return {
+      newVenue: null,
+      sessions: [{
+        startTime: new Date(),
+        endTime: new Date(),
+        talk: {
+          id: '',
+          codeUrl: '',
+          description: '',
+          seeAlsoTalkIds: [{
+            value: ''
+          }],
+          slidesUrl: '',
+          title: '',
+          videoUrl: '',
+          speakerIds: ['']
+        }
+      }],
+      venueId: '',
+      newFriends: [],
+      id: '',
+      name: '',
+      friendIds: [''],
+      communityId: 'SpbDotNet',
+      newSpeakers: [],
+    };
+  }
+}
