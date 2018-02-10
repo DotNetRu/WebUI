@@ -8,10 +8,10 @@ export interface IMeetup {
   name: string;
   communityId: string;
   venueId: string;
-  newVenue?: IVenue;
   friendIds: string[];
   sessions: ISession[];
 
+  newVenue?: IVenue;
   newFriends: IFriend[];
   newSpeakers: ISpeaker[];
 }

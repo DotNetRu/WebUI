@@ -99,4 +99,23 @@
       </button>
     </div>
   </div>
+
+  <div class="row" *ngIf="meetup.newVenue">
+    <div class="col-sm-10">
+<pre #venueResult>
+&lt;Venue&gt;
+  &lt;Id&gt;{{meetup.newVenue.id | xmlEncode}}&lt;/Id&gt;
+  &lt;Name&gt;{{meetup.newVenue.name | xmlEncode}}&lt;/Name&gt;
+  &lt;Address&gt;{{meetup.newVenue.address | xmlEncode}}&lt;/Address&gt;
+  &lt;MapUrl&gt;{{meetup.newVenue.mapUrl | xmlEncode}}&lt;/MapUrl&gt;
+&lt;/Venue&gt;
+</pre>
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-dark" (click)="download(talkResult, session.talk.id+'.xml')">
+        <i class="fa fa-download"></i>
+        talks\{{session.talk.id}}.xml
+      </button>
+    </div>
+  </div>
 </div>
