@@ -1,0 +1,17 @@
+<div class="form-group row" >
+  <label for="{{id}}" class="col-sm-2 col-form-label">{{label}}:</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" required
+             id="{{id}}"
+             [value]="value"
+             (input)="valueChange.emit($event.target.value)"/>
+      <div class="input-group-append button" (click)="toggle.emit()">
+        <div class="input-group-text">
+          <i  *ngIf="add" title="{{buttonTitle}}" class="fa fa-plus-circle"></i>
+          <i  *ngIf="!add" title="{{buttonTitle}}" class="fa fa-minus-circle"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

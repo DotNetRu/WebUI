@@ -1,0 +1,52 @@
+<h2>Доклад</h2>
+
+<app-input-editor label="Идентификатор" [(value)]="session.talk.id" ></app-input-editor>
+
+<div class="form-group row">
+  <label for="startTime" class="col-sm-2 col-form-label">Дата и время:</label>
+  <div class="col-sm-10 ">
+    <div class="form-inline">
+      <input type="date" class="form-control" required id="date"
+             [ngModel]="session.startTime  | date:'yyyy-MM-dd'"
+             (ngModelChange)="setDates($event)"/>
+      <label class="mx-2" for="startTime" >От:</label>
+      <input type="time" class="form-control" required id="startTime"
+             [ngModel]="session.startTime | date:'HH:mm'"
+             (ngModelChange)="setTimeFor(session.startTime, $event) "/>
+      <label class="mx-2" for="endTime" >До:</label>
+      <input type="time" class="form-control" required id="endTime"
+             [ngModel]="session.endTime | date:'HH:mm'"
+             (ngModelChange)="setTimeFor(session.endTime, $event) "/>
+    </div>
+  </div>
+</div>
+
+<app-input-editor label="Название" [(value)]="session.talk.title" ></app-input-editor>
+
+<app-input-editor label="Описание"
+                  [(value)]="session.talk.description"
+                  [type]="InputType.TextArea"></app-input-editor>
+
+<div class="form-group row" *ngFor="let seeAlso of session.talk.seeAlsoTalkIds; index as index">
+  <label [for]="'seeAlsoTalkId' + index" class="col-sm-2 col-form-label">Другие части:</label>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <input type="text" class="form-control" [id]="'seeAlsoTalkId' + index" [(ngModel)]="seeAlso.value"/>
+      <div class="input-group-append button" *ngIf="session.talk.seeAlsoTalkIds.length > 1">
+        <div class="input-group-text">
+          <i title="Удалить ссылку" class="fa fa-remove" (click)="removeSeeAlso(seeAlso)" ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row" >
+  <div class="col-form-label col-sm-12">
+    <button class="btn btn-info pull-right" (click)="addSeeAlso()"><i class="fa fa-plus"></i> Еще одна ссылка</button>
+  </div>
+</div>
+
+<app-input-editor [type]="InputType.Url" label="Код" [(value)]="session.talk.codeUrl" ></app-input-editor>
+<app-input-editor [type]="InputType.Url" label="Слайды" [(value)]="session.talk.slidesUrl" ></app-input-editor>
+<app-input-editor [type]="InputType.Url" label="Видео" [(value)]="session.talk.videoUrl" ></app-input-editor>

@@ -1,0 +1,65 @@
+<app-id-editor *ngIf="!isNewSpeaker"
+               buttonTitle="Новый спикер"
+               [(value)]="talk.speakerIds[speakerIndex]"
+               label="Идентификатор"
+               [add]="true"
+               (toggle)="toggle()" >
+</app-id-editor>
+
+<app-id-editor *ngIf="isNewSpeaker"
+               buttonTitle="Уже существующий спикер"
+               [value]="talk.speakerIds[speakerIndex]"
+               (valueChange)="talk.speakerIds[speakerIndex] = $event; speaker.id = $event"
+               label="Идентификатор"
+               [add]="false"
+               (toggle)="toggle()">
+</app-id-editor>
+
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Имя"
+                  [(value)]="speaker.name" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Компания"
+                  [(value)]="speaker.companyName" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Компания (url)"
+                  [type]="InputType.Url"
+                  [(value)]="speaker.companyUrl" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Блог (url)"
+                  [type]="InputType.Url"
+                  [(value)]="speaker.blogUrl" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Контакты (url)"
+                  [type]="InputType.Url"
+                  [(value)]="speaker.contactsUrl" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Twitter (url)"
+                  [type]="InputType.Url"
+                  [(value)]="speaker.twitterUrl" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Хабр (url)"
+                  [type]="InputType.Url"
+                  [(value)]="speaker.habrUrl" >
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewSpeaker"
+                  label="Описание"
+                  [type]="InputType.TextArea"
+                  [(value)]="speaker.description" >
+</app-input-editor>
+
+

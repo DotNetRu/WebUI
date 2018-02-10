@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="#">TalkPad </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" (click)="state=0">Редактировать встречу</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" (click)="state=1">Результат</a>
+    </li>
+  </ul>
+
+</nav>
+
+<div class="container">
+  <app-editor *ngIf="state == 0" [meetup]="meetup"></app-editor>
+
+  <app-result-viewer *ngIf="state == 1"  [meetup]="meetup"></app-result-viewer>
+</div>

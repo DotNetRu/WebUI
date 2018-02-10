@@ -1,0 +1,34 @@
+<app-id-editor *ngIf="!isNewFriend"
+          buttonTitle="Новый друг"
+          [(value)]="meetup.friendIds[friendIndex]"
+          label="Идентификатор"
+          [add]="true"
+          (toggle)="toggle()" >
+</app-id-editor>
+
+<app-id-editor *ngIf="isNewFriend"
+               buttonTitle="Уже существующий друг"
+               [value]="friend.id"
+               (valueChange)="friend.id = $event; meetup.friendIds[friendIndex] = $event"
+               label="Идентификатор"
+               [add]="false"
+               (toggle)="toggle()">
+</app-id-editor>
+
+<app-input-editor *ngIf="isNewFriend"
+            [type]="InputType.Text"
+            label="Имя"
+            [(value)]="friend.name">
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewFriend"
+            [type]="InputType.Url"
+            label="Адрес (Url)"
+            [(value)]="friend.url">
+</app-input-editor>
+
+<app-input-editor *ngIf="isNewFriend"
+            [type]="InputType.TextArea"
+            label="Описание"
+            [(value)]="friend.description">
+</app-input-editor>
