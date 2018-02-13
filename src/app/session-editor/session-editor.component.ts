@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {ISession} from '../models/session';
 import {InputType} from '../input-editor/input-editor.component';
 import {ISeeAlsoId} from '../models/seeAlsoId';
+import {IMeetup} from "../models/meetup";
 
 @Component({
   selector: 'app-session-editor',
@@ -15,6 +16,8 @@ export class SessionEditorComponent  {
   @Input()
   public session: ISession;
 
+  @Input()
+  public meetup: IMeetup;
 
   removeSeeAlso(seeAlso: ISeeAlsoId) {
     const index = this.session.talk.seeAlsoTalkIds.findIndex(item => item === seeAlso);

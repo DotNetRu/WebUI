@@ -41,12 +41,12 @@ export class EditorComponent {
   public clear() {
     if(window.confirm('Очистить встречу?')){
       this.meetup = Object.assign(this.meetup, MeetupFactory.createMeetup());
+      this.state = EditorState.General;
     }
   }
 }
 
 export enum EditorState {
   General,
-  Talk,
-  Speaker
+  Talk
 }

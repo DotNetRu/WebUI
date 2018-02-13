@@ -8,10 +8,6 @@
                         [session]="meetup.sessions[selectedIndex]">
     </app-session-editor>
 
-    <app-speaker-list-editor *ngIf="state == EditorState.Speaker"
-                             [talk]="meetup.sessions[selectedIndex].talk"
-                             [meetup]="meetup">
-    </app-speaker-list-editor>
   </div>
 
   <div class="col-sm-3">
@@ -22,23 +18,13 @@
            [class.active]="state == EditorState.General">Общая информация</a>
       </li>
 
-      <ng-container *ngFor="let session of meetup.sessions; index as index">
-        <li class="nav-item">
+      <li class="nav-item" *ngFor="let session of meetup.sessions; index as index">
           <a href="#" class="nav-link "
              (click)="state=EditorState.Talk;selectedIndex = index;"
              [class.active]="state == EditorState.Talk && selectedIndex == index">
             Доклад {{index + 1}}
           </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link "
-             (click)="state=EditorState.Speaker;selectedIndex = index;"
-             [class.active]="state == EditorState.Speaker && selectedIndex == index">
-            Спикеры
-          </a>
-        </li>
-      </ng-container>
-
+      </li>
       <li class="nav-item">
         <a href="#" class="nav-link " (click)="addSession()">
           <i class="fa fa-plus"></i> Добавить доклад

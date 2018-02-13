@@ -50,3 +50,9 @@
 <app-input-editor [type]="InputType.Url" label="Код" [(value)]="session.talk.codeUrl" ></app-input-editor>
 <app-input-editor [type]="InputType.Url" label="Слайды" [(value)]="session.talk.slidesUrl" ></app-input-editor>
 <app-input-editor [type]="InputType.Url" label="Видео" [(value)]="session.talk.videoUrl" ></app-input-editor>
+
+<h2>Спикеры</h2>
+<app-speaker-list-editor
+          [talk]="session.talk"
+          [meetup]="meetup">
+</app-speaker-list-editor>
