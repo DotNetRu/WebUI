@@ -3,8 +3,8 @@
 <app-input-editor label="Идентификатор" [(value)]="session.talk.id" ></app-input-editor>
 
 <div class="form-group row">
-  <label for="startTime" class="col-sm-2 col-form-label">Дата и время:</label>
-  <div class="col-sm-10 ">
+  <label for="startTime" class="col-sm-3 col-form-label">Дата и время:</label>
+  <div class="col-sm-9 ">
     <div class="form-inline">
       <input type="date" class="form-control" required id="date"
              [ngModel]="session.startTime  | date:'yyyy-MM-dd'"
