@@ -37,6 +37,6 @@ export class SessionEditorComponent  {
 
   setTimeFor(dateTime: Date, timeStr: string) {
     const time = new Date(timeStr);
-    dateTime.setHours(time.getHours(), time.getMinutes(), 0);
+    dateTime.setHours(time.getUTCHours(), time.getUTCMinutes(), 0);
   }
 }

@@ -17,6 +17,10 @@ export class AppComponent implements  DoCheck {
     const stored = localStorage.getItem(AppComponent._storageKey);
     if (stored) {
       this.meetup = Object.assign(MeetupFactory.createMeetup(), JSON.parse(stored));
+      this.meetup.sessions.forEach(session =>{
+        session.startTime = new Date(session.startTime);
+        session.endTime = new Date(session.endTime);
+      });
     }
     else {
       this.meetup = MeetupFactory.createMeetup();

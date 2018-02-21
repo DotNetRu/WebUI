@@ -11,8 +11,14 @@ export class XmlEncodePipe implements PipeTransform {
   }
 
   transform(value: string): string {
+    if (value) {
+      return value.replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+    }
 
-    return this._santizer.sanitize(SecurityContext.HTML, value);
+    return value;
   }
-
 }

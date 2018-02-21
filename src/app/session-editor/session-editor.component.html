@@ -10,13 +10,13 @@
              [ngModel]="session.startTime  | date:'yyyy-MM-dd'"
              (ngModelChange)="setDates($event)"/>
       <label class="mx-2" for="startTime" >От:</label>
-      <input type="time" class="form-control" required id="startTime"
+      <input type="time" class="form-control" required id="startTime" #startTimeInput
              [ngModel]="session.startTime | date:'HH:mm'"
-             (ngModelChange)="setTimeFor(session.startTime, $event) "/>
+             (ngModelChange)="setTimeFor(session.startTime, startTimeInput.valueAsDate) "/>
       <label class="mx-2" for="endTime" >До:</label>
-      <input type="time" class="form-control" required id="endTime"
+      <input type="time" class="form-control" required id="endTime" #endTimeInput
              [ngModel]="session.endTime | date:'HH:mm'"
-             (ngModelChange)="setTimeFor(session.endTime, $event) "/>
+             (ngModelChange)="setTimeFor(session.endTime, endTimeInput.valueAsDate) "/>
     </div>
   </div>
 </div>
