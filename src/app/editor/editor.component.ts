@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {IMeetup, MeetupFactory} from '../models/meetup';
+import {IMeetup} from '../models/meetup';
+import {MeetupFactory} from "../models/meetupFactory";
 
 @Component({
   selector: 'app-editor',
@@ -17,22 +18,9 @@ export class EditorComponent {
   public meetup: IMeetup ;
 
   public addSession() {
-    this.meetup.sessions.push({
-      startTime: new Date(),
-      endTime: new Date(),
-      talk: {
-        id: '',
-        codeUrl: '',
-        description: '',
-        seeAlsoTalkIds: [{
-          value: ''
-        }],
-        slidesUrl: '',
-        title: '',
-        videoUrl: '',
-        speakerIds: ['']
-      }
-    });
+    const previousEndDate = this.meetup.sessions[this.meetup.sessions.length - 1].endTime;
+
+    this.meetup.sessions.push(MeetupFactory.createSession(previousEndDate));
 
     this.state = EditorState.Talk;
     this.selectedIndex = this.meetup.sessions.length - 1;

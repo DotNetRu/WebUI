@@ -1,62 +1,61 @@
-<app-id-editor *ngIf="!isNewSpeaker"
+<app-id-editor *ngIf="!speaker.isNew"
                buttonTitle="Новый спикер"
-               [(value)]="talk.speakerIds[speakerIndex]"
+               [(value)]="speaker.id"
                label="Идентификатор"
                [add]="true"
-               (toggle)="toggle()" >
+               (toggle)="speaker.isNew = !speaker.isNew">
 </app-id-editor>
 
-<app-id-editor *ngIf="isNewSpeaker"
+<app-id-editor *ngIf="speaker.isNew"
                buttonTitle="Уже существующий спикер"
-               [value]="talk.speakerIds[speakerIndex]"
-               (valueChange)="talk.speakerIds[speakerIndex] = $event; speaker.id = $event"
+               [(value)]="speaker.id"
                label="Идентификатор"
                [add]="false"
-               (toggle)="toggle()">
+               (toggle)="speaker.isNew = !speaker.isNew">
 </app-id-editor>
 
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Имя"
                   [(value)]="speaker.name" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Компания"
                   [(value)]="speaker.companyName" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Компания (url)"
                   [type]="InputType.Url"
                   [(value)]="speaker.companyUrl" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Блог (url)"
                   [type]="InputType.Url"
                   [(value)]="speaker.blogUrl" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Контакты (url)"
                   [type]="InputType.Url"
                   [(value)]="speaker.contactsUrl" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Twitter (url)"
                   [type]="InputType.Url"
                   [(value)]="speaker.twitterUrl" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Хабр (url)"
                   [type]="InputType.Url"
                   [(value)]="speaker.habrUrl" >
 </app-input-editor>
 
-<app-input-editor *ngIf="isNewSpeaker"
+<app-input-editor *ngIf="speaker.isNew"
                   label="Описание"
                   [type]="InputType.TextArea"
                   [(value)]="speaker.description" >

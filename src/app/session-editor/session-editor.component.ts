@@ -16,9 +16,6 @@ export class SessionEditorComponent  {
   @Input()
   public session: ISession;
 
-  @Input()
-  public meetup: IMeetup;
-
   removeSeeAlso(seeAlso: ISeeAlsoId) {
     const index = this.session.talk.seeAlsoTalkIds.findIndex(item => item === seeAlso);
     this.session.talk.seeAlsoTalkIds.splice(index, 1);
@@ -33,6 +30,7 @@ export class SessionEditorComponent  {
   setDates(dateStr: string) {
     var date = new Date(dateStr);
     this.session.startTime.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+    this.session.endTime.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
   }
 
   setTimeFor(dateTime: Date, timeStr: string) {

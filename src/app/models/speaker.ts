@@ -1,5 +1,6 @@
 export interface ISpeaker {
   id: string;
+  isNew: boolean;
   name: string;
   companyName: string;
   companyUrl: string;

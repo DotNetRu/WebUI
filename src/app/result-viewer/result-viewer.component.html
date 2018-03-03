@@ -7,10 +7,10 @@
   &lt;Name&gt;{{meetup.name | xmlEncode}}&lt;/Name&gt;
   &lt;CommunityId&gt;{{meetup.communityId | xmlEncode}}&lt;/CommunityId&gt;
   &lt;Date&gt;{{meetup.sessions[0].startTime | date:'yyyy-MM-dd'}}&lt;/Date&gt;
-  &lt;FriendIds&gt;<ng-container *ngFor="let friendId of meetup.friendIds">
-    &lt;FriendId&gt;{{friendId | xmlEncode}}&lt;/FriendId&gt;</ng-container>
+  &lt;FriendIds&gt;<ng-container *ngFor="let friend of meetup.friends">
+    &lt;FriendId&gt;{{friend.id | xmlEncode}}&lt;/FriendId&gt;</ng-container>
   &lt;/FriendIds&gt;
-  &lt;VenueId&gt;{{meetup.venueId | xmlEncode}}&lt;/VenueId&gt;
+  &lt;VenueId&gt;{{meetup.venue.id | xmlEncode}}&lt;/VenueId&gt;
   &lt;Sessions&gt;  <ng-container *ngFor="let session of meetup.sessions">
     &lt;Session&gt;
       &lt;TalkId&gt;{{session.talk.id | xmlEncode}}&lt;/TalkId&gt;
@@ -33,33 +33,37 @@
   </div>
 
 
-
-<div class="row" *ngFor="let speaker of meetup.newSpeakers">
-  <div class="col-sm-10">
+<ng-container *ngFor="let session of meetup.sessions">
+  <ng-container *ngFor="let speaker of session.talk.speakers">
+    <div class="row" *ngIf="speaker.isNew">
+      <div class="col-sm-10">
 <pre #speakerResult>
 &lt;Speaker&gt;
   &lt;Id&gt;{{speaker.id | xmlEncode}}&lt;/Id&gt;
-  &lt;Name&gt;{{speaker.name | xmlEncode}}&lt;/Name&gt;
-  &lt;CompanyName&gt;{{speaker.companyName | xmlEncode}}&lt;/CompanyName&gt;
-  &lt;CompanyUrl&gt;{{speaker.companyUrl | xmlEncode}}&lt;/CompanyUrl&gt;
-  &lt;Description&gt;{{speaker.description | xmlEncode}}&lt;/Description&gt;
-  &lt;BlogUrl&gt;{{speaker.blogUrl | xmlEncode}}&lt;/BlogUrl&gt;
-  &lt;ContactsUrl&gt;{{speaker.contactsUrl | xmlEncode}}&lt;/ContactsUrl&gt;
-  &lt;TwitterUrl&gt;{{speaker.twitterUrl | xmlEncode}}&lt;/TwitterUrl&gt;
-  &lt;HabrUrl&gt;{{speaker.habrUrl | xmlEncode}}&lt;/HabrUrl&gt;
+  &lt;Name&gt;{{speaker.name | xmlEncode}}&lt;/Name&gt;<ng-container *ngIf="speaker.companyName">
+  &lt;CompanyName>{{speaker.companyName | xmlEncode}}&lt;/CompanyName&gt;</ng-container><ng-container *ngIf="speaker.companyUrl">
+  &lt;CompanyUrl>{{speaker.companyUrl | xmlEncode}}&lt;/CompanyUrl></ng-container>
+  &lt;Description&gt;{{speaker.description | xmlEncode}}&lt;/Description&gt;<ng-container *ngIf="speaker.blogUrl">
+  &lt;BlogUrl&gt;{{speaker.blogUrl | xmlEncode}}&lt;/BlogUrl&gt;</ng-container><ng-container *ngIf="speaker.contactsUrl">
+  &lt;ContactsUrl&gt;{{speaker.contactsUrl | xmlEncode}}&lt;/ContactsUrl&gt;</ng-container><ng-container *ngIf="speaker.twitterUrl">
+  &lt;TwitterUrl&gt;{{speaker.twitterUrl | xmlEncode}}&lt;/TwitterUrl&gt;</ng-container><ng-container *ngIf="speaker.habrUrl">
+  &lt;HabrUrl&gt;{{speaker.habrUrl | xmlEncode}}&lt;/HabrUrl&gt;</ng-container>
 &lt;/Speaker&gt;
 </pre>
-  </div>
-  <div class="col-sm-2">
-    <button class="btn btn-dark" (click)="download(speakerResult, 'index.xml')">
-      <i class="fa fa-download"></i>
-      speakers\{{speaker.id}}\index.xml
-    </button>
-  </div>
-</div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-dark" (click)="download(speakerResult, 'index.xml')">
+          <i class="fa fa-download"></i>
+          speakers\{{speaker.id}}\index.xml
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
 
-<div class="row" *ngFor="let friend of meetup.newFriends">
-  <div class="col-sm-10">
+<ng-container *ngFor="let friend of meetup.friends">
+  <div class="row" *ngIf="friend.isNew">
+    <div class="col-sm-10">
 <pre #friendResult>
 &lt;Friend&gt;
   &lt;Id&gt;{{friend.id | xmlEncode}}&lt;/Id&gt;
@@ -68,22 +72,23 @@
   &lt;Description&gt;{{friend.description | xmlEncode}}&lt;/Description&gt;
 &lt;/Friend&gt;
 </pre>
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-dark" (click)="download(friendResult, 'index.xml')">
+        <i class="fa fa-download"></i>
+        friends\{{friend.id}}\index.xml
+      </button>
+    </div>
   </div>
-  <div class="col-sm-2">
-    <button class="btn btn-dark" (click)="download(friendResult, 'index.xml')">
-      <i class="fa fa-download"></i>
-      friends\{{friend.id}}\index.xml
-    </button>
-  </div>
-</div>
+</ng-container>
 
   <div class="row" *ngFor="let session of meetup.sessions">
     <div class="col-sm-10">
 <pre #talkResult>
 &lt;Talk&gt;
   &lt;Id&gt;{{session.talk.id | xmlEncode}}&lt;/Id&gt;
-  &lt;SpeakerIds&gt;<ng-container *ngFor="let speakerId of session.talk.speakerIds">
-    &lt;SpeakerId&gt;{{speakerId | xmlEncode}}&lt;/SpeakerId&gt;</ng-container>
+  &lt;SpeakerIds&gt;<ng-container *ngFor="let speaker of session.talk.speakers">
+    &lt;SpeakerId&gt;{{speaker.id | xmlEncode}}&lt;/SpeakerId&gt;</ng-container>
   &lt;/SpeakerIds&gt;
   &lt;Title&gt;{{session.talk.title | xmlEncode}}&lt;/Title&gt;
   &lt;Description&gt;{{session.talk.description | xmlEncode}}&lt;/Description&gt;
@@ -100,21 +105,21 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="meetup.newVenue">
+  <div class="row" *ngIf="meetup.venue.isNew">
     <div class="col-sm-10">
 <pre #venueResult>
 &lt;Venue&gt;
-  &lt;Id&gt;{{meetup.newVenue.id | xmlEncode}}&lt;/Id&gt;
-  &lt;Name&gt;{{meetup.newVenue.name | xmlEncode}}&lt;/Name&gt;
-  &lt;Address&gt;{{meetup.newVenue.address | xmlEncode}}&lt;/Address&gt;
-  &lt;MapUrl&gt;{{meetup.newVenue.mapUrl | xmlEncode}}&lt;/MapUrl&gt;
+  &lt;Id&gt;{{meetup.venue.id | xmlEncode}}&lt;/Id&gt;
+  &lt;Name&gt;{{meetup.venue.name | xmlEncode}}&lt;/Name&gt;
+  &lt;Address&gt;{{meetup.venue.address | xmlEncode}}&lt;/Address&gt;
+  &lt;MapUrl&gt;{{meetup.venue.mapUrl | xmlEncode}}&lt;/MapUrl&gt;
 &lt;/Venue&gt;
 </pre>
     </div>
     <div class="col-sm-2">
-      <button class="btn btn-dark" (click)="download(talkResult, session.talk.id+'.xml')">
+      <button class="btn btn-dark" (click)="download(talkResult, meetup.venue.id+'.xml')">
         <i class="fa fa-download"></i>
-        talks\{{session.talk.id}}.xml
+        venues\{{meetup.venue.id}}.xml
       </button>
     </div>
   </div>

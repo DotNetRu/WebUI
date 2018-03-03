@@ -1,6 +1,7 @@
-pre{
+pre, textarea{
   height: 10em;
   overflow-y: auto;
   border-radius: 5px;
   border: 1px solid gray;
+  width: 100%;
 }

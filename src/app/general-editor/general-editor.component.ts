@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IMeetup} from '../models/meetup';
 import {InputType} from '../input-editor/input-editor.component';
+import {IFriend} from "../models/friend";
+import {MeetupFactory} from "../models/meetupFactory";
 
 @Component({
   selector: 'app-general-editor',
@@ -17,17 +19,12 @@ export class GeneralEditorComponent {
   public meetup: IMeetup;
 
   addFriend() {
-    this.meetup.friendIds.push('');
+    this.meetup.friends.push(MeetupFactory.createFriend());
   }
 
-  removeFriend(friendIndex: number) {
-    const friendId = this.meetup.friendIds[friendIndex];
-    this.meetup.friendIds.splice(friendIndex, 1);
-
-    const newFriendIndex = this.meetup.newFriends.findIndex(item => item.id === friendId);
-    if (newFriendIndex) {
-      this.meetup.newFriends.splice(newFriendIndex, 1);
-    }
+  removeFriend(friend: IFriend) {
+    const index = this.meetup.friends.findIndex(item => item === friend);
+    this.meetup.friends.splice(index, 1);
   }
 
   trackByIndex(index: number): number {

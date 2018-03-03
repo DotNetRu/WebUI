@@ -1,5 +1,6 @@
 import { Component, DoCheck, SimpleChanges } from '@angular/core';
-import {IMeetup, MeetupFactory} from './models/meetup';
+import {IMeetup} from './models/meetup';
+import {MeetupFactory} from "./models/meetupFactory";
 
 @Component({
   selector: 'app-root',

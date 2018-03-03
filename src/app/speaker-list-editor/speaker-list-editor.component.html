@@ -1,15 +1,13 @@
-<fieldset *ngFor="let friendId of talk.speakerIds; index as index; trackBy: trackById">
+<fieldset *ngFor="let speaker of talk.speakers; index as index; trackBy: trackById">
   <legend>{{index + 1}}</legend>
 
   <button class="btn btn-dark ml-2 pull-right"
           (click)="removeSpeker(index)"
-          [disabled]="talk.speakerIds.length <= 1"><i class="fa fa-trash"></i> Удалить
+          [disabled]="talk.speakers.length <= 1"><i class="fa fa-trash"></i> Удалить
   </button>
 
   <app-speaker-editor
-          [meetup]="meetup"
-          [speakerIndex]="index"
-          [talk]="talk">
+          [speaker]="speaker">
   </app-speaker-editor>
 </fieldset>
 

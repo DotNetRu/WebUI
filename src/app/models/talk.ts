@@ -1,8 +1,9 @@
 import {ISeeAlsoId} from './seeAlsoId';
+import {ISpeaker} from './speaker';
 
 export interface ITalk {
   id: string;
-  speakerIds: string[];
+  speakers: ISpeaker[];
   title: string;
   description: string;
   seeAlsoTalkIds: ISeeAlsoId[];

@@ -1,30 +1,30 @@
 <div>
-  <app-id-editor *ngIf="!meetup.newVenue"
+  <app-id-editor *ngIf="!venue.isNew"
     label="Идентификатор"
     [add]="true"
     buttonTitle="Новая площадка"
-    [(value)]="meetup.venueId"
-    (toggle)="toggleVenue()"
+    [(value)]="venue.id"
+    (toggle)="venue.isNew = !venue.isNew"
   ></app-id-editor>
 
-  <app-id-editor *ngIf="meetup.newVenue"
+  <app-id-editor *ngIf="venue.isNew"
     label="Идентификатор"
     [add]="false"
     buttonTitle="Уже существующая площадка"
-    [(value)]="meetup.newVenue.id"
-    (toggle)="toggleVenue()"
+    [(value)]="venue.id"
+    (toggle)="venue.isNew = !venue.isNew"
   ></app-id-editor>
 
-  <app-input-editor *ngIf="meetup.newVenue"
-                    label="Название" [(value)]="meetup.newVenue.name" [type]="InputType.Text">
+  <app-input-editor *ngIf="venue.isNew"
+                    label="Название" [(value)]="venue.name" [type]="InputType.Text">
   </app-input-editor>
 
-  <app-input-editor *ngIf="meetup.newVenue"
-                    label="Адрес" [(value)]="meetup.newVenue.address" [type]="InputType.Text">
+  <app-input-editor *ngIf="venue.isNew"
+                    label="Адрес" [(value)]="venue.address" [type]="InputType.Text">
   </app-input-editor>
 
-  <app-input-editor *ngIf="meetup.newVenue"
-                    label="Карта" [(value)]="meetup.newVenue.mapUrl" [type]="InputType.Url">
+  <app-input-editor *ngIf="venue.isNew"
+                    label="Карта" [(value)]="venue.mapUrl" [type]="InputType.Url">
   </app-input-editor>
 
 

@@ -24,20 +24,18 @@
   <fieldset class="form-group">
     <legend>Площадка:</legend>
 
-    <app-venue-editor [meetup]="meetup"></app-venue-editor>
+    <app-venue-editor [venue]="meetup.venue" ></app-venue-editor>
   </fieldset>
 
   <fieldset class="form-group">
     <legend>Друзья:</legend>
 
-    <fieldset *ngFor="let friendId of meetup.friendIds; index as index; trackBy: trackByIndex">
+    <fieldset *ngFor="let friend of meetup.friends; index as index; trackBy: trackByIndex">
       <legend>{{index + 1}}</legend>
 
-      <button class="btn btn-dark ml-2 pull-right" (click)="removeFriend(friendId)" [disabled]="meetup.friendIds.length <= 1"><i class="fa fa-trash"></i> Удалить</button>
+      <button class="btn btn-dark ml-2 pull-right" (click)="removeFriend(friend)" [disabled]="meetup.friends.length <= 1"><i class="fa fa-trash"></i> Удалить</button>
 
-      <app-friend-editor
-                         [friendIndex]="index"
-                         [meetup]="meetup">
+      <app-friend-editor [friend]="friend">
       </app-friend-editor>
     </fieldset>
 
