@@ -26,6 +26,15 @@ export class EditorComponent {
     this.selectedIndex = this.meetup.sessions.length - 1;
   }
 
+  public removeCurrentSession(){
+    if (window.confirm('Удалить? Вы уверены?')) {
+      this.meetup.sessions.splice(this.selectedIndex, 1);
+      if (this.selectedIndex !== 0) {
+        this.selectedIndex --;
+      }
+    }
+  }
+
   public clear() {
     if(window.confirm('Очистить встречу?')){
       this.meetup = Object.assign(this.meetup, MeetupFactory.createMeetup());

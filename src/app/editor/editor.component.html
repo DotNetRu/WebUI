@@ -26,9 +26,18 @@
             Доклад {{index + 1}}
           </a>
       </li>
+    </ul>
+    <br/>
+
+    <ul class="nav nav-pills flex-column">
       <li class="nav-item">
         <a href="#" class="nav-link " (click)="addSession()">
           <i class="fa fa-plus"></i> Добавить доклад
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="state == EditorState.Talk && meetup.sessions.length > 1">
+        <a href="#" class="nav-link " (click)="removeCurrentSession()">
+          <i class="fa fa-trash"></i> Удалить доклад
         </a>
       </li>
     </ul>
