@@ -3,6 +3,7 @@ import {ITalk} from "./talk";
 import {IFriend} from "./friend";
 import {ISession} from "./session";
 import {IMeetup} from "./meetup";
+import {IVenue} from "./venue";
 
 export class MeetupFactory {
   public static createSpeaker(): ISpeaker {
@@ -67,15 +68,19 @@ export class MeetupFactory {
     };
   }
 
+  public static createVenue(): IVenue {
+    return {
+      id: '',
+      isNew: false,
+      address: '',
+      mapUrl: '',
+      name: ''
+    };
+  }
+
   public static createMeetup(): IMeetup {
     return {
-      venue: {
-        id: '',
-        isNew: false,
-        address: '',
-        mapUrl: '',
-        name: ''
-      },
+      venue: MeetupFactory.createVenue(),
       sessions: [MeetupFactory.createSession()],
       id: '',
       name: '',

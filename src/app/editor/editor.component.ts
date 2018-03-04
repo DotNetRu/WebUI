@@ -15,7 +15,7 @@ export class EditorComponent {
   public selectedIndex = 0;
 
   @Input()
-  public meetup: IMeetup ;
+  public meetup: IMeetup;
 
   public addSession() {
     const previousEndDate = this.meetup.sessions[this.meetup.sessions.length - 1].endTime;

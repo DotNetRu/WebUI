@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditorComponent } from './editor.component';
+import { AppModule } from '../app.module';
+import { MeetupFactory } from '../models/meetupFactory';
 
 describe('EditorComponent', () => {
   let component: EditorComponent;
@@ -8,7 +10,9 @@ describe('EditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditorComponent ]
+      imports: [
+        AppModule,
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +20,7 @@ describe('EditorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditorComponent);
     component = fixture.componentInstance;
+    component.meetup = MeetupFactory.createMeetup();
     fixture.detectChanges();
   });
 

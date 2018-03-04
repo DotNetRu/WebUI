@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IdEditorComponent } from './id-editor.component';
+import {AppModule} from "../app.module";
 
 describe('IdEditorComponent', () => {
   let component: IdEditorComponent;
@@ -8,7 +9,9 @@ describe('IdEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IdEditorComponent ]
+      imports: [
+        AppModule,
+      ]
     })
     .compileComponents();
   }));

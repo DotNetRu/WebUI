@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultViewerComponent } from './result-viewer.component';
+import {AppModule} from "../app.module";
+import {MeetupFactory} from "../models/meetupFactory";
 
 describe('ResultViewerComponent', () => {
   let component: ResultViewerComponent;
@@ -8,7 +10,9 @@ describe('ResultViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultViewerComponent ]
+      imports: [
+        AppModule,
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +20,7 @@ describe('ResultViewerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ResultViewerComponent);
     component = fixture.componentInstance;
+    component.meetup = MeetupFactory.createMeetup();
     fixture.detectChanges();
   });
 

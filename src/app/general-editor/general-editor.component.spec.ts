@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeneralEditorComponent } from './general-editor.component';
+import {AppModule} from "../app.module";
+import {MeetupFactory} from "../models/meetupFactory";
 
 describe('GeneralEditorComponent', () => {
   let component: GeneralEditorComponent;
@@ -8,7 +10,9 @@ describe('GeneralEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralEditorComponent ]
+      imports: [
+        AppModule,
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +20,7 @@ describe('GeneralEditorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GeneralEditorComponent);
     component = fixture.componentInstance;
+    component.meetup = MeetupFactory.createMeetup();
     fixture.detectChanges();
   });
 
