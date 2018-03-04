@@ -31,9 +31,12 @@
     <legend>Друзья:</legend>
 
     <fieldset *ngFor="let friend of meetup.friends; index as index; trackBy: trackByIndex">
-      <legend>{{index + 1}}</legend>
-
-      <button class="btn btn-dark ml-2 pull-right" (click)="removeFriend(friend)" [disabled]="meetup.friends.length <= 1"><i class="fa fa-trash"></i> Удалить</button>
+      <legend class="right">
+        <button class="btn btn-dark ml-2 pull-right"
+                title="Удалить"
+                (click)="removeFriend(friend)"
+                [disabled]="meetup.friends.length <= 1"><i class="fa fa-trash"></i></button>
+      </legend>
 
       <app-friend-editor [friend]="friend">
       </app-friend-editor>

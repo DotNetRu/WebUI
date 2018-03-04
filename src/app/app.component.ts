@@ -1,4 +1,4 @@
-import { Component, DoCheck, SimpleChanges } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import {IMeetup} from './models/meetup';
 import {MeetupFactory} from "./models/meetupFactory";
 
@@ -22,8 +22,7 @@ export class AppComponent implements  DoCheck {
         session.startTime = new Date(session.startTime);
         session.endTime = new Date(session.endTime);
       });
-    }
-    else {
+    } else {
       this.meetup = MeetupFactory.createMeetup();
     }
   }

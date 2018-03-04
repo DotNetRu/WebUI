@@ -17,6 +17,30 @@ legend {
   margin-right: 1em;
 }
 
+legend.right{
+  text-align: right;
+  margin-right: 1em;
+}
+
 .button{
   cursor: pointer;
 }
+
+input.form-control, select.form-control, textarea.form-control {
+  border-left: 5px solid #b4b4b4; /* grey */
+}
+
+.ng-valid[required], .ng-valid.required {
+  border-left: 5px solid #42A948; /* green */
+}
+
+/* not empty input with pattern */
+.ng-valid[pattern]:not([ng-reflect-model='']) {
+  border-left: 5px solid #42A948; /* green */
+}
+
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+

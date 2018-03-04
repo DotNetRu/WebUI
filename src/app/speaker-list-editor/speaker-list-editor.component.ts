@@ -21,8 +21,10 @@ export class SpeakerListEditorComponent {
   }
 
   removeSpeker(speaker: ISpeaker) {
-    const index = this.talk.speakers.findIndex(item => item === speaker);
-    this.talk.speakers.splice(index, 1);
+    if (window.confirm('Удалить? Вы уверены?')) {
+      const index = this.talk.speakers.findIndex(item => item === speaker);
+      this.talk.speakers.splice(index, 1);
+    }
   }
 
   trackById(index: number, speakerId: string): number {

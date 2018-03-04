@@ -1,10 +1,11 @@
 <fieldset *ngFor="let speaker of talk.speakers; index as index; trackBy: trackById">
-  <legend>{{index + 1}}</legend>
-
-  <button class="btn btn-dark ml-2 pull-right"
-          (click)="removeSpeker(index)"
-          [disabled]="talk.speakers.length <= 1"><i class="fa fa-trash"></i> Удалить
-  </button>
+  <legend class="right">
+    <button class="btn btn-dark ml-2 pull-right"
+            title="Удалить"
+            (click)="removeSpeker(index)"
+            [disabled]="talk.speakers.length <= 1"><i class="fa fa-trash"></i>
+    </button>
+  </legend>
 
   <app-speaker-editor
           [speaker]="speaker">

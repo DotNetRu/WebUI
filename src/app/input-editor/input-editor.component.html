@@ -1,17 +1,26 @@
 <div class="form-group row">
   <label [for]="id" class="col-sm-3 col-form-label">{{label}}:</label>
   <div class="col-sm-9">
-    <input *ngIf="type != InputType.TextArea"
+    <input *ngIf="type != InputType.TextArea && type != InputType.Url"
            [type]="InputType[type]"
            class="form-control"
            [id]="id"
            [ngModel]="value"
            (ngModelChange)="valueChange.emit($event)"
-           pattern="^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?"
+           [required]="required"
            />
-
+    <input *ngIf="type == InputType.Url"
+           type="url"
+           class="form-control"
+           [id]="id"
+           [ngModel]="value"
+           (ngModelChange)="valueChange.emit($event)"
+           [required]="required"
+           pattern="^(https?)://[^\s/$.?#].[^\s]*$"
+    />
     <textarea *ngIf="type == InputType.TextArea"
-               class="form-control"
+              class="form-control"
+              [required]="required"
               [id]="id"
               [ngModel]="value"
               (ngModelChange)="valueChange.emit($event)"></textarea>

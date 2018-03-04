@@ -4,8 +4,8 @@
     <div class="input-group">
       <input type="text" class="form-control" required
              id="{{id}}"
-             [value]="value"
-             (input)="valueChange.emit($event.target.value)"/>
+             [ngModel]="value"
+             (ngModelChange)="valueChange.emit($event)"/>
       <div class="input-group-append button" (click)="toggle.emit()">
         <div class="input-group-text">
           <i  *ngIf="add" title="{{buttonTitle}}" class="fa fa-plus-circle"></i>

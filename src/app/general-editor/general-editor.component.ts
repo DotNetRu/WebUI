@@ -23,8 +23,10 @@ export class GeneralEditorComponent {
   }
 
   removeFriend(friend: IFriend) {
-    const index = this.meetup.friends.findIndex(item => item === friend);
-    this.meetup.friends.splice(index, 1);
+    if (window.confirm('Удалить? Вы уверены?')) {
+      const index = this.meetup.friends.findIndex(item => item === friend);
+      this.meetup.friends.splice(index, 1);
+    }
   }
 
   trackByIndex(index: number): number {

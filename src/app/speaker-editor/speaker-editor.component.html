@@ -33,24 +33,28 @@
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Блог (url)"
+                  required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.blogUrl" >
 </app-input-editor>
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Контакты (url)"
+                  required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.contactsUrl" >
 </app-input-editor>
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Twitter (url)"
+                  required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.twitterUrl" >
 </app-input-editor>
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Хабр (url)"
+                  required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.habrUrl" >
 </app-input-editor>

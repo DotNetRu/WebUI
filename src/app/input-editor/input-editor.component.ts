@@ -32,6 +32,9 @@ export class InputEditorComponent  {
   @Input()
   public label = '';
 
+  @Input()
+  public required = true;
+
   @Output()
   valueChange = new EventEmitter<any>();
 
