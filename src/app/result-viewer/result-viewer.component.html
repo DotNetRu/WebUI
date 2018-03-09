@@ -6,7 +6,6 @@
   &lt;Id&gt;{{meetup.id | xmlEncode}}&lt;/Id&gt;
   &lt;Name&gt;{{meetup.name | xmlEncode}}&lt;/Name&gt;
   &lt;CommunityId&gt;{{meetup.communityId | xmlEncode}}&lt;/CommunityId&gt;
-  &lt;Date&gt;{{meetup.sessions[0].startTime | date:'yyyy-MM-dd'}}&lt;/Date&gt;
   &lt;FriendIds&gt;<ng-container *ngFor="let friend of meetup.friends">
     &lt;FriendId&gt;{{friend.id | xmlEncode}}&lt;/FriendId&gt;</ng-container>
   &lt;/FriendIds&gt;
@@ -18,9 +17,6 @@
       &lt;EndTime&gt;{{session.endTime | date: 'yyyy-MM-ddTHH:mm:ss' : UTC}}Z&lt;/EndTime&gt;
     &lt;/Session&gt;</ng-container>
   &lt;/Sessions&gt;
-  &lt;TalkIds&gt;<ng-container *ngFor="let session of meetup.sessions">
-      &lt;TalkId&gt;{{session.talk.id | xmlEncode}}&lt;/TalkId&gt;</ng-container>
-  &lt;/TalkIds&gt;
 &lt;/Meetup&gt;
 </pre>
     </div>
