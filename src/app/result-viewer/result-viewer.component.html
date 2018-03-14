@@ -87,9 +87,13 @@
     &lt;SpeakerId&gt;{{speaker.id | xmlEncode}}&lt;/SpeakerId&gt;</ng-container>
   &lt;/SpeakerIds&gt;
   &lt;Title&gt;{{session.talk.title | xmlEncode}}&lt;/Title&gt;
-  &lt;Description&gt;{{session.talk.description | xmlEncode}}&lt;/Description&gt;
-  &lt;SlidesUrl&gt;{{session.talk.slidesUrl | xmlEncode}}&lt;/SlidesUrl&gt;
-  &lt;VideoUrl&gt;{{session.talk.videoUrl | xmlEncode}}&lt;/VideoUrl&gt;
+  &lt;Description&gt;{{session.talk.description | xmlEncode}}&lt;/Description&gt;<ng-container *ngIf="session.talk.slidesUrl">
+  &lt;SlidesUrl&gt;{{session.talk.slidesUrl | xmlEncode}}&lt;/SlidesUrl&gt;</ng-container><ng-container *ngIf="session.talk.videoUrl">
+  &lt;VideoUrl&gt;{{session.talk.videoUrl | xmlEncode}}&lt;/VideoUrl&gt;</ng-container><ng-container *ngIf="session.talk.codeUrl">
+  &lt;CodeUrl&gt;{{session.talk.codeUrl | xmlEncode}}&lt;/CodeUrl&gt;</ng-container><ng-container *ngIf="session.talk.seeAlsoTalkIds.length >1 || session.talk.seeAlsoTalkIds[0].value">
+  &lt;SeeAlsoTalkIds&gt;<ng-container *ngFor="let seeAlsoTalkId of session.talk.seeAlsoTalkIds">
+    &lt;SeeAlsoTalkId&gt;{{seeAlsoTalkId.value | xmlEncode}}&lt;/SeeAlsoTalkId&gt;</ng-container>
+  &lt;/SeeAlsoTalkIds&gt;</ng-container>
 &lt;/Talk&gt;
 </pre>
     </div>
