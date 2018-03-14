@@ -2,6 +2,7 @@
   <app-id-editor *ngIf="!venue.isNew"
     label="Идентификатор"
     [add]="true"
+    id="venueId"
     buttonTitle="Новая площадка"
     [(value)]="venue.id"
     (toggle)="venue.isNew = !venue.isNew"
@@ -10,20 +11,24 @@
   <app-id-editor *ngIf="venue.isNew"
     label="Идентификатор"
     [add]="false"
+    id="venueId"
     buttonTitle="Уже существующая площадка"
     [(value)]="venue.id"
     (toggle)="venue.isNew = !venue.isNew"
   ></app-id-editor>
 
   <app-input-editor *ngIf="venue.isNew"
+                    id="venueName"
                     label="Название" [(value)]="venue.name" [type]="InputType.Text">
   </app-input-editor>
 
   <app-input-editor *ngIf="venue.isNew"
+                    id="venueAddress"
                     label="Адрес" [(value)]="venue.address" [type]="InputType.Text">
   </app-input-editor>
 
   <app-input-editor *ngIf="venue.isNew"
+                    id="venueMapUrl"
                     label="Карта" [(value)]="venue.mapUrl" [type]="InputType.Url">
   </app-input-editor>
 

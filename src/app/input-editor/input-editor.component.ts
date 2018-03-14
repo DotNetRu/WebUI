@@ -11,7 +11,6 @@ export class InputEditorComponent  {
   private _type: InputType = InputType.Text;
 
   public InputType = InputType;
-  public id: string;
   public pattern = '';
 
   @Input()
@@ -31,6 +30,9 @@ export class InputEditorComponent  {
 
   @Input()
   public label = '';
+
+  @Input()
+  public id: string;
 
   @Input()
   public required = true;

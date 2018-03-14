@@ -2,6 +2,7 @@
                buttonTitle="Новый спикер"
                [(value)]="speaker.id"
                label="Идентификатор"
+               id="speakerId"
                [add]="true"
                (toggle)="speaker.isNew = !speaker.isNew">
 </app-id-editor>
@@ -10,6 +11,7 @@
                buttonTitle="Уже существующий спикер"
                [(value)]="speaker.id"
                label="Идентификатор"
+               id="speakerId"
                [add]="false"
                (toggle)="speaker.isNew = !speaker.isNew">
 </app-id-editor>
@@ -17,22 +19,26 @@
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Имя"
+                  id="speakerName"
                   [(value)]="speaker.name" >
 </app-input-editor>
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Компания"
+                  id="speakerCompany"
                   [(value)]="speaker.companyName" >
 </app-input-editor>
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Компания (url)"
+                  id="speakerCompanyUrl"
                   [type]="InputType.Url"
                   [(value)]="speaker.companyUrl" >
 </app-input-editor>
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Блог (url)"
+                  id="speakerBlogUrl"
                   required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.blogUrl" >
@@ -40,6 +46,7 @@
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Контакты (url)"
+                  id="speakerContactUrl"
                   required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.contactsUrl" >
@@ -47,6 +54,7 @@
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Twitter (url)"
+                  id="speakerTwitterUrl"
                   required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.twitterUrl" >
@@ -54,6 +62,7 @@
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Хабр (url)"
+                  id="speakerHabrUrl"
                   required="false"
                   [type]="InputType.Url"
                   [(value)]="speaker.habrUrl" >
@@ -61,6 +70,7 @@
 
 <app-input-editor *ngIf="speaker.isNew"
                   label="Описание"
+                  id="speakerDescription"
                   [type]="InputType.TextArea"
                   [(value)]="speaker.description" >
 </app-input-editor>

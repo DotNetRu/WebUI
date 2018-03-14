@@ -2,6 +2,7 @@
           buttonTitle="Новый друг"
           [(value)]="friend.id"
           label="Идентификатор"
+          id="friendId"
           [add]="true"
           (toggle)="friend.isNew = !friend.isNew" >
 </app-id-editor>
@@ -9,6 +10,7 @@
 <app-id-editor *ngIf="friend.isNew"
                buttonTitle="Уже существующий друг"
                [(value)]="friend.id"
+               id="friendId"
                label="Идентификатор"
                [add]="false"
                (toggle)="friend.isNew = !friend.isNew" >
@@ -16,18 +18,21 @@
 
 <app-input-editor *ngIf="friend.isNew"
             [type]="InputType.Text"
+            id="friendName"
             label="Имя"
             [(value)]="friend.name">
 </app-input-editor>
 
 <app-input-editor *ngIf="friend.isNew"
             [type]="InputType.Url"
+            id="friendUrl"
             label="Адрес (Url)"
             [(value)]="friend.url">
 </app-input-editor>
 
 <app-input-editor *ngIf="friend.isNew"
             [type]="InputType.TextArea"
+            id="friendDescription"
             label="Описание"
             [(value)]="friend.description">
 </app-input-editor>

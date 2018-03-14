@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class IdEditorComponent {
   private static _id = 0;
 
+  @Input()
   public id = '';
 
   @Input()

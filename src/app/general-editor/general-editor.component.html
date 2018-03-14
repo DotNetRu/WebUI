@@ -15,10 +15,12 @@
   <app-input-editor
     [type]="InputType.Text"
     [(value)]="meetup.id"
+    id="meetupId"
     label="Идентификатор"></app-input-editor>
 
   <app-input-editor
     [(value)]="meetup.name"
+    id="meetupName"
     label="Название"></app-input-editor>
 
   <fieldset class="form-group">

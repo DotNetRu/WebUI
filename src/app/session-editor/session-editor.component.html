@@ -8,26 +8,33 @@
     <div class="form-inline">
       <input type="date" class="form-control" required id="date"
              [required]="true"
+             id="date"
              [ngModel]="session.startTime  | date:'yyyy-MM-dd'"
              (ngModelChange)="setDates($event)"/>
       <label class="mx-2" for="startTime" >От:</label>
       <input type="time" class="form-control" required id="startTime" #startTimeInput
              [required]="true"
+             id="fromTime"
              [ngModel]="session.startTime | date:'HH:mm'"
              (ngModelChange)="setTimeFor(session.startTime, startTimeInput.valueAsDate) "/>
       <label class="mx-2" for="endTime" >До:</label>
       <input type="time" class="form-control" required id="endTime" #endTimeInput
              [required]="true"
+             id="toTime"
              [ngModel]="session.endTime | date:'HH:mm'"
              (ngModelChange)="setTimeFor(session.endTime, endTimeInput.valueAsDate) "/>
     </div>
   </div>
 </div>
 
-<app-input-editor label="Название" [(value)]="session.talk.title" ></app-input-editor>
+<app-input-editor
+                  label="Название"
+                  [(value)]="session.talk.title"
+                  id="talkTitle"></app-input-editor>
 
 <app-input-editor label="Описание"
                   [(value)]="session.talk.description"
+                  id="taldDescription"
                   [type]="InputType.TextArea"></app-input-editor>
 
 <div class="form-group row" *ngFor="let seeAlso of session.talk.seeAlsoTalkIds; index as index">
@@ -50,9 +57,21 @@
   </div>
 </div>
 
-<app-input-editor [type]="InputType.Url" label="Код" [(value)]="session.talk.codeUrl" required="false"></app-input-editor>
-<app-input-editor [type]="InputType.Url" label="Слайды" [(value)]="session.talk.slidesUrl" required="false"></app-input-editor>
-<app-input-editor [type]="InputType.Url" label="Видео" [(value)]="session.talk.videoUrl" required="false"></app-input-editor>
+<app-input-editor [type]="InputType.Url"
+                  label="Код"
+                  id="talkCodeUrl"
+                  [(value)]="session.talk.codeUrl"
+                  required="false"></app-input-editor>
+<app-input-editor [type]="InputType.Url"
+                  label="Слайды"
+                  id="talkSlideUrl"
+                  [(value)]="session.talk.slidesUrl"
+                  required="false"></app-input-editor>
+<app-input-editor [type]="InputType.Url"
+                  label="Видео"
+                  id="talkVideoUrl"
+                  [(value)]="session.talk.videoUrl"
+                  required="false"></app-input-editor>
 
 <h2>Спикеры</h2>
 <app-speaker-list-editor
