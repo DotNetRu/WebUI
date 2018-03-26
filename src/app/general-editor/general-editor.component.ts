@@ -3,6 +3,7 @@ import {IMeetup} from '../models/meetup';
 import {InputType} from '../input-editor/input-editor.component';
 import {IFriend} from "../models/friend";
 import {MeetupFactory} from "../models/meetupFactory";
+import {Community, ICommunity} from "../models/community";
 
 @Component({
   selector: 'app-general-editor',
@@ -17,6 +18,8 @@ export class GeneralEditorComponent {
 
   @Input()
   public meetup: IMeetup;
+
+  public communitites: ICommunity[] = Community.All;
 
   addFriend() {
     this.meetup.friends.push(MeetupFactory.createFriend());

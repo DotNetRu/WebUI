@@ -1,6 +1,9 @@
 import {Component, Input, ElementRef} from '@angular/core';
 import {IMeetup} from '../models/meetup';
 
+import * as moment from 'moment-timezone';
+import {Community} from "../models/community";
+
 @Component({
   selector: 'app-result-viewer',
   templateUrl: './result-viewer.component.html',
@@ -23,6 +26,17 @@ export class ResultViewerComponent {
     a.href = window.URL.createObjectURL(blob);
     a.download = fileName;
     a.click();
+  }
+
+  public toUtc(date: Date): string {
+    let localDate = moment(date);
+    if (this.meetup.communityId) {
+      const community = Community.All.find(item => item.id === this.meetup.communityId);
+      localDate = moment.tz(date, community.timeZone);;
+    }
+
+    const utcDate = localDate.tz('UTC');
+    return utcDate.format('YYYY-MM-DDTHH:mm:ss');
   }
 
   private encodeUTF8(s: string) {

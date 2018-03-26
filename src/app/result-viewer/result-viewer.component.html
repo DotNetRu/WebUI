@@ -13,8 +13,8 @@
   &lt;Sessions&gt;  <ng-container *ngFor="let session of meetup.sessions">
     &lt;Session&gt;
       &lt;TalkId&gt;{{session.talk.id | xmlEncode}}&lt;/TalkId&gt;
-      &lt;StartTime&gt;{{session.startTime | date: 'yyyy-MM-ddTHH:mm:ss' : UTC}}Z&lt;/StartTime&gt;
-      &lt;EndTime&gt;{{session.endTime | date: 'yyyy-MM-ddTHH:mm:ss' : UTC}}Z&lt;/EndTime&gt;
+      &lt;StartTime&gt;{{toUtc(session.startTime)}}Z&lt;/StartTime&gt;
+      &lt;EndTime&gt;{{toUtc(session.endTime)}}Z&lt;/EndTime&gt;
     &lt;/Session&gt;</ng-container>
   &lt;/Sessions&gt;
 &lt;/Meetup&gt;
