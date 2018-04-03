@@ -17,6 +17,7 @@ import { SpeakerEditorComponent } from './speaker-editor/speaker-editor.componen
 import { SpeakerListEditorComponent } from './speaker-list-editor/speaker-list-editor.component';
 import { ResultViewerComponent } from './result-viewer/result-viewer.component';
 import { XmlEncodePipe } from './xml-encode.pipe';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { XmlEncodePipe } from './xml-encode.pipe';
     SpeakerEditorComponent,
     SpeakerListEditorComponent,
     ResultViewerComponent,
-    XmlEncodePipe
+    XmlEncodePipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

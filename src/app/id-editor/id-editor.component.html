@@ -1,9 +1,11 @@
 <div class="form-group row" >
   <label for="{{id}}" class="col-sm-3 col-form-label">{{label}}:</label>
   <div class="col-sm-9">
-    <div class="input-group">
+    <div class="input-group" ngbDropdown #myDrop="ngbDropdown">
       <input type="text" class="form-control" required
              id="{{id}}"
+             ngbDropdownAnchor
+             (focus)="myDrop.open()"
              [ngModel]="value"
              (ngModelChange)="valueChange.emit($event)"/>
       <div class="input-group-append button" (click)="toggle.emit()">
@@ -11,6 +13,14 @@
           <i  *ngIf="add" title="{{buttonTitle}}" class="fa fa-plus-circle"></i>
           <i  *ngIf="!add" title="{{buttonTitle}}" class="fa fa-minus-circle"></i>
         </div>
+      </div>
+
+      <div ngbDropdownMenu >
+        <button class="dropdown-item"
+                *ngFor="let item of autoCompleteValues | filter: value"
+                (click)="valueChange.emit(item)">
+          {{item}}
+        </button>
       </div>
     </div>
   </div>

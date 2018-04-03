@@ -1,6 +1,7 @@
 <app-id-editor *ngIf="!friend.isNew"
           buttonTitle="Новый друг"
           [(value)]="friend.id"
+          [autoCompleteValues]="['Friend1', 'Friend2', 'Another']"
           label="Идентификатор"
           id="friendId"
           [add]="true"

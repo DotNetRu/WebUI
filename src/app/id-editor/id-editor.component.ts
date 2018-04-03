@@ -23,6 +23,9 @@ export class IdEditorComponent {
   @Input()
   public buttonTitle = '';
 
+  @Input()
+  public autoCompleteValues: string[] = [];
+
   @Output()
   public toggle = new EventEmitter();
 
