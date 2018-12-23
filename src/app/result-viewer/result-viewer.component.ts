@@ -19,7 +19,7 @@ export class ResultViewerComponent {
   public download(element: any, fileName: string) {
     const contentType = 'application/octet-stream';
 
-    const content =  this.encodeUTF8(element.textContent);
+    const content =  this.encodeUTF8BomCrlf(element.textContent);
 
     var a = document.createElement('a');
     var blob = new Blob([content], {'type': contentType});
@@ -39,12 +39,20 @@ export class ResultViewerComponent {
     return utcDate.format('YYYY-MM-DDTHH:mm:ss');
   }
 
-  private encodeUTF8(s: string) {
-    var i = 0;
+  private encodeUTF8BomCrlf(s: string) {
+    var i = 3;
     var bytes = new Uint8Array(s.length * 4);
+
+    bytes[0] = 0xEF;
+    bytes[1] = 0xBB;
+    bytes[2] = 0xBF;
+
     for (var ci = 0; ci != s.length; ci++) {
       var c = s.charCodeAt(ci);
       if (c < 128) {
+        if (c === 0x0A && ci !== 0 && s.charCodeAt(ci - 1) !== 0x0D) {
+          bytes[i++] = 0x0D;
+        }
         bytes[i++] = c;
         continue;
       }
